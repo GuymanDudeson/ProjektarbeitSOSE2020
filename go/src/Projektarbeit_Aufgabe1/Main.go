@@ -27,7 +27,7 @@ func main() {
 	var tests = []TestCase{
 		{longestSuffixWithoutSplit("Ha::ll:o", "::"), ":ll:o"},
 		{longestSuffixWithoutSplit("Ha::ll::o", "::"), ":o"},
-		{longestSuffixWithoutSplit("Ha:ll:o", "::"), "a:ll:o"},
+		{longestSuffixWithoutSplit("Ha:ll:o", "::"), "Ha:ll:o"},
 		{longestSuffixWithoutSplit("Ha::ll:::o", "::"), ":o"},
 		{longestSuffixWithoutSplit("Ha::ll:o::", "::"), ":"},
 	}
@@ -37,8 +37,8 @@ func main() {
 }
 
 func longestSuffixEasy(s string, pattern string) string {
-	var suffixes = strings.SplitAfter(s, pattern)
-	return suffixes[len(suffixes) - 1]
+	var suffixes = strings.SplitAfter(s, pattern) //Creates a new Slice with substrings of s separated by the specified pattern
+	return suffixes[len(suffixes) - 1]		//Last Slice entry is automatically the longest suffix without the pattern
 }
 
 func longestSuffixWithoutSplit(s string, pattern string) string{
