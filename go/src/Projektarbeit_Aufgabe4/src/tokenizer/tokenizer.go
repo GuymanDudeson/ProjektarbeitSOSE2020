@@ -1,4 +1,4 @@
-package Projektarbeit_Aufgabe4
+package tokenizer
 
 type Token int
 const (
@@ -12,7 +12,7 @@ const (
 	MULT	Token = 7
 )
 
-func showTok(t Token) string {
+func ShowTok(t Token) string {
 	switch t {
 		case EOS: return "EOS"
 		case ZERO: return "ZERO"
@@ -31,7 +31,7 @@ type Tokenize struct {
 	pos int
 }
 
-func newTokenize(_s string) Tokenize {
+func NewTokenize(_s string) Tokenize {
 	var t = Tokenize{
 		s:   _s,
 		pos: 0,
@@ -39,7 +39,7 @@ func newTokenize(_s string) Tokenize {
 	return t
 }
 
-func (t Tokenize) next() Token {
+func (t Tokenize) Next() Token {
 	if len(t.s) <= t.pos {
 		return EOS
 	}
@@ -79,12 +79,12 @@ func (t Tokenize) next() Token {
 	return EOS
 }
 
-func (t Tokenize) scan() []Token{
+func (t Tokenize) Scan() []Token{
 	var v []Token
 	var tempToken Token
 
 	for {
-		tempToken = t.next()
+		tempToken = t.Next()
 		v = append(v, tempToken)
 		if tempToken == EOS {
 			break
@@ -93,12 +93,12 @@ func (t Tokenize) scan() []Token{
 	return v
 }
 
-func (t Tokenize) show() string {
-	var v = t.scan()
+func (t Tokenize) Show() string {
+	var v = t.Scan()
 	var s string
 
 	for i, currentToken := range v {
-		s += showTok(Token(currentToken))
+		s += ShowTok(Token(currentToken))
 
 		if i+1 < len(v) {
 			s += ";"
@@ -109,16 +109,16 @@ func (t Tokenize) show() string {
 
 type Tokenizer struct {
 	Tokenize Tokenize
-	token Token
+	Token Token
 }
 
-func newTokenizer(s string) Tokenizer {
-	var tokenize = newTokenize(s)
-	var token = tokenize.next()
+func NewTokenizer(s string) Tokenizer {
+	var tokenize = NewTokenize(s)
+	var token = tokenize.Next()
 	return Tokenizer{tokenize, token}
 }
 
-func (t Tokenizer) nextToken() {
-	t.token = t.Tokenize.next()
+func (t Tokenizer) NextToken() {
+	t.Token = t.Tokenize.Next()
 }
 
