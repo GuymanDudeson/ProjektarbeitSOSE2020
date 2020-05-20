@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"strings"
 )
 
 func main() {
@@ -14,13 +13,13 @@ func main() {
 
 //Teil a
 func reverse(s string) string{
-	var reversedString = strings.Builder{}
+	var reversedString = []rune("")
 
 	for i := len(s) - 1; i >= 0; i-- {
-		reversedString.WriteByte(s[i])
+		reversedString = append(reversedString, rune(s[i]))
 	}
 
-	return reversedString.String()
+	return string(reversedString)
 }
 
 //Teil b
@@ -36,10 +35,7 @@ func reverseRec(s string, n int) string{
 //Util
 
 func putBack(s string, c rune) string{
-	var newString strings.Builder
-
-	newString.WriteString(s)
-	newString.WriteRune(c)
-
-	return newString.String()
+	var r = []rune(s)
+	r = append(r, c)
+	return string(r)
 }
