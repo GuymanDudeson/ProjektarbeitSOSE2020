@@ -7,21 +7,12 @@ type Exp interface {
 	pretty() string
 }
 
-type IntExpInterface interface {
-	newIntExp(val int) IntExp
-}
-
-type PlusExpInterface interface {
-	newPlusExp(e1 Exp, e2 Exp) PlusExp
-}
-
-type MultExpInterface interface {
-	newMultExp(e1 Exp, e2 Exp) MultExp
-}
-
-
 type IntExp struct {
 	val int
+}
+
+func newIntExp(val int) IntExp {
+	return IntExp{val: val}
 }
 
 func (exp IntExp) eval() int{
@@ -35,6 +26,13 @@ func (exp IntExp) pretty() string{
 type PlusExp struct {
 	e1 Exp
 	e2 Exp
+}
+
+func newPlusExp(e1 Exp, e2 Exp) PlusExp {
+	return PlusExp{
+		e1: e1,
+		e2: e2,
+	}
 }
 
 func (exp PlusExp) eval() int{
@@ -54,6 +52,13 @@ func (exp PlusExp) pretty() string{
 type MultExp struct {
 	e1 Exp
 	e2 Exp
+}
+
+func newMultExp(e1 Exp, e2 Exp) MultExp {
+	return MultExp{
+		e1: e1,
+		e2: e2,
+	}
 }
 
 func (exp MultExp) eval() int{
