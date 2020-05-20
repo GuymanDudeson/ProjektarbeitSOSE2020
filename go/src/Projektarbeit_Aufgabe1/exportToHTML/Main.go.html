@@ -1,0 +1,142 @@
+<html>
+<head>
+<title>Main.go</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #c7773e;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #a9b7c6;}
+.s3 { color: #6a8759;}
+.s4 { color: #cc7832;}
+.s5 { color: #6897bb;}
+.s6 { color: #787878;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+Main.go</font>
+</center></td></tr></table>
+<pre><span class="s0">package </span><span class="s2">main</span>
+
+<span class="s0">import </span><span class="s1">(</span>
+	<span class="s3">&quot;fmt&quot;</span>
+	<span class="s3">&quot;strings&quot;</span>
+<span class="s1">)</span>
+
+<span class="s0">func </span><span class="s2">main</span><span class="s1">() {</span>
+	<span class="s0">var </span><span class="s2">s </span><span class="s1">= </span><span class="s3">&quot;Ha::ll:o&quot;</span>
+	<span class="s0">var </span><span class="s2">p </span><span class="s1">= </span><span class="s3">&quot;::&quot;</span>
+
+	<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;The longest Suffix of %s that does not contain %s is %s</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s4">, </span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s4">, </span><span class="s2">longestSuffixEasy</span><span class="s1">(</span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s1">))</span>
+	<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;The longest Suffix of %s that does not contain %s is %s</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s4">, </span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s4">, </span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s1">))</span>
+
+	<span class="s2">s </span><span class="s1">= </span><span class="s3">&quot;Martin Sulzmann&quot;</span>
+	<span class="s2">p </span><span class="s1">= </span><span class="s3">&quot; &quot;</span>
+
+	<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;The Surname of %s is %s</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s4">, </span><span class="s2">s</span><span class="s4">, </span><span class="s2">longestSuffixEasy</span><span class="s1">(</span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s1">))</span>
+	<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;The Surname of %s is %s</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s4">, </span><span class="s2">s</span><span class="s4">, </span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s1">))</span>
+
+	<span class="s2">s </span><span class="s1">= </span><span class="s3">&quot;Ottottottottotto&quot;</span>
+	<span class="s2">p </span><span class="s1">= </span><span class="s3">&quot;otto&quot;</span>
+
+	<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;The longest Suffix of %s that does not contain %s is %s</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s4">, </span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s4">, </span><span class="s2">longestSuffixEasy</span><span class="s1">(</span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s1">))</span>
+	<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;The longest Suffix of %s that does not contain %s is %s</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s4">, </span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s4">, </span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s2">s</span><span class="s4">, </span><span class="s2">p</span><span class="s1">))</span>
+
+	<span class="s0">var </span><span class="s2">tests </span><span class="s1">= []</span><span class="s2">TestCase</span><span class="s1">{</span>
+		<span class="s1">{</span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s3">&quot;Ha::ll:o&quot;</span><span class="s4">, </span><span class="s3">&quot;::&quot;</span><span class="s1">)</span><span class="s4">, </span><span class="s3">&quot;:ll:o&quot;</span><span class="s1">}</span><span class="s4">,</span>
+		<span class="s1">{</span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s3">&quot;Ha::ll::o&quot;</span><span class="s4">, </span><span class="s3">&quot;::&quot;</span><span class="s1">)</span><span class="s4">, </span><span class="s3">&quot;:o&quot;</span><span class="s1">}</span><span class="s4">,</span>
+		<span class="s1">{</span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s3">&quot;Ha:ll:o&quot;</span><span class="s4">, </span><span class="s3">&quot;::&quot;</span><span class="s1">)</span><span class="s4">, </span><span class="s3">&quot;a:ll:o&quot;</span><span class="s1">}</span><span class="s4">,</span>
+		<span class="s1">{</span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s3">&quot;Ha::ll:::o&quot;</span><span class="s4">, </span><span class="s3">&quot;::&quot;</span><span class="s1">)</span><span class="s4">, </span><span class="s3">&quot;:o&quot;</span><span class="s1">}</span><span class="s4">,</span>
+		<span class="s1">{</span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s3">&quot;Ha::ll:o::&quot;</span><span class="s4">, </span><span class="s3">&quot;::&quot;</span><span class="s1">)</span><span class="s4">, </span><span class="s3">&quot;:&quot;</span><span class="s1">}</span><span class="s4">,</span>
+	<span class="s1">}</span>
+
+	<span class="s2">runTests</span><span class="s1">(</span><span class="s2">tests</span><span class="s1">)</span>
+
+<span class="s1">}</span>
+
+<span class="s0">func </span><span class="s2">longestSuffixEasy</span><span class="s1">(</span><span class="s2">s string</span><span class="s4">, </span><span class="s2">pattern string</span><span class="s1">) </span><span class="s2">string </span><span class="s1">{</span>
+	<span class="s0">var </span><span class="s2">suffixes </span><span class="s1">= </span><span class="s2">strings</span><span class="s1">.</span><span class="s2">SplitAfter</span><span class="s1">(</span><span class="s2">s</span><span class="s4">, </span><span class="s2">pattern</span><span class="s1">)</span>
+	<span class="s0">return </span><span class="s2">suffixes</span><span class="s1">[</span><span class="s2">len</span><span class="s1">(</span><span class="s2">suffixes</span><span class="s1">) - </span><span class="s5">1</span><span class="s1">]</span>
+<span class="s1">}</span>
+
+<span class="s0">func </span><span class="s2">longestSuffixWithoutSplit</span><span class="s1">(</span><span class="s2">s string</span><span class="s4">, </span><span class="s2">pattern string</span><span class="s1">) </span><span class="s2">string</span><span class="s1">{</span>
+	<span class="s0">var </span><span class="s2">patternlength </span><span class="s1">= </span><span class="s2">len</span><span class="s1">(</span><span class="s2">pattern</span><span class="s1">)</span>
+	<span class="s0">var </span><span class="s2">stringLength </span><span class="s1">= </span><span class="s2">len</span><span class="s1">(</span><span class="s2">s</span><span class="s1">)</span>
+	<span class="s0">var </span><span class="s2">longestSuffix strings</span><span class="s1">.</span><span class="s2">Builder</span>
+	<span class="s0">var </span><span class="s2">longestSuffixIndex </span><span class="s1">= </span><span class="s5">0</span>
+
+	<span class="s6">//Loop iterates over all runes in the give String</span>
+	<span class="s0">for </span><span class="s2">i</span><span class="s4">, </span><span class="s2">r </span><span class="s1">:= </span><span class="s0">range </span><span class="s2">s </span><span class="s1">{</span>
+
+		<span class="s6">//If the remaining String is not big enough to contain the Pattern stop searching</span>
+		<span class="s0">if </span><span class="s2">stringLength </span><span class="s1">- </span><span class="s2">i </span><span class="s1">&gt;= </span><span class="s2">patternlength</span><span class="s1">{</span>
+
+			<span class="s6">//If a rune matches the start of the pattern compare all subsequent runes until one doesn't match or pattern complete</span>
+			<span class="s0">if </span><span class="s2">r </span><span class="s1">== </span><span class="s2">int32</span><span class="s1">(</span><span class="s2">pattern</span><span class="s1">[</span><span class="s5">0</span><span class="s1">]) {</span>
+				<span class="s0">for </span><span class="s2">j </span><span class="s1">:= </span><span class="s5">1</span><span class="s4">; </span><span class="s2">j </span><span class="s1">&lt;= </span><span class="s2">patternlength</span><span class="s4">; </span><span class="s2">j</span><span class="s1">++ {</span>
+					<span class="s0">if </span><span class="s2">j </span><span class="s1">== </span><span class="s2">patternlength</span><span class="s1">{</span>
+						<span class="s2">longestSuffixIndex </span><span class="s1">= </span><span class="s2">i </span><span class="s1">+ </span><span class="s5">1</span>
+						<span class="s0">break</span>
+					<span class="s1">} </span><span class="s0">else if </span><span class="s2">s</span><span class="s1">[</span><span class="s2">i </span><span class="s1">+ </span><span class="s2">j</span><span class="s1">] != </span><span class="s2">pattern</span><span class="s1">[</span><span class="s2">j</span><span class="s1">]{</span>
+						<span class="s0">break</span>
+					<span class="s1">}</span>
+				<span class="s1">}</span>
+			<span class="s1">}</span>
+		<span class="s1">}</span>
+	<span class="s1">}</span>
+
+	<span class="s6">//Builds a new String only containing the Suffix</span>
+	<span class="s0">for </span><span class="s2">i </span><span class="s1">:= </span><span class="s2">longestSuffixIndex</span><span class="s4">; </span><span class="s2">i </span><span class="s1">&lt; </span><span class="s2">stringLength</span><span class="s4">; </span><span class="s2">i</span><span class="s1">++ {</span>
+		<span class="s2">longestSuffix</span><span class="s1">.</span><span class="s2">WriteByte</span><span class="s1">(</span><span class="s2">s</span><span class="s1">[</span><span class="s2">i</span><span class="s1">])</span>
+	<span class="s1">}</span>
+
+	<span class="s0">return </span><span class="s2">longestSuffix</span><span class="s1">.</span><span class="s2">String</span><span class="s1">()</span>
+<span class="s1">}</span>
+
+
+<span class="s6">//Tests</span>
+<span class="s0">type </span><span class="s2">Result int</span>
+<span class="s0">const </span><span class="s1">(</span>
+	<span class="s2">OK   Result </span><span class="s1">= </span><span class="s5">1</span>
+	<span class="s2">FAIL Result </span><span class="s1">= </span><span class="s5">0</span>
+<span class="s1">)</span>
+
+<span class="s0">type </span><span class="s2">TestCase </span><span class="s0">struct </span><span class="s1">{</span>
+	<span class="s2">input string</span>
+	<span class="s2">expected string</span>
+<span class="s1">}</span>
+
+<span class="s0">func </span><span class="s2">runTests</span><span class="s1">(</span><span class="s2">tests </span><span class="s1">[]</span><span class="s2">TestCase</span><span class="s1">) {</span>
+	<span class="s0">var </span><span class="s2">result Result</span>
+	<span class="s0">for </span><span class="s2">i</span><span class="s4">, </span><span class="s2">t </span><span class="s1">:= </span><span class="s0">range </span><span class="s2">tests </span><span class="s1">{</span>
+		<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;Test %d</span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s4">, </span><span class="s2">i</span><span class="s1">)</span>
+		<span class="s2">result </span><span class="s1">= </span><span class="s2">stringIsEqual</span><span class="s1">(</span><span class="s2">t</span><span class="s1">.</span><span class="s2">input</span><span class="s4">, </span><span class="s2">t</span><span class="s1">.</span><span class="s2">expected</span><span class="s1">)</span>
+
+		<span class="s0">if </span><span class="s2">OK </span><span class="s1">== </span><span class="s2">result</span><span class="s1">{</span>
+			<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;OK </span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+		<span class="s1">}</span>
+		<span class="s0">if </span><span class="s2">FAIL </span><span class="s1">== </span><span class="s2">result</span><span class="s1">{</span>
+			<span class="s2">fmt</span><span class="s1">.</span><span class="s2">Printf</span><span class="s1">(</span><span class="s3">&quot;FAIL </span><span class="s4">\n</span><span class="s3">&quot;</span><span class="s1">)</span>
+		<span class="s1">}</span>
+	<span class="s1">}</span>
+<span class="s1">}</span>
+
+<span class="s0">func </span><span class="s2">stringIsEqual</span><span class="s1">(</span><span class="s2">input string</span><span class="s4">, </span><span class="s2">expected string</span><span class="s1">) </span><span class="s2">Result </span><span class="s1">{</span>
+	<span class="s0">var </span><span class="s2">r Result</span>
+
+	<span class="s0">if </span><span class="s2">strings</span><span class="s1">.</span><span class="s2">Compare</span><span class="s1">(</span><span class="s2">input</span><span class="s4">, </span><span class="s2">expected</span><span class="s1">) == </span><span class="s5">0</span><span class="s1">{</span>
+		<span class="s2">r </span><span class="s1">= </span><span class="s2">OK</span>
+	<span class="s1">} </span><span class="s0">else </span><span class="s1">{</span>
+		<span class="s2">r </span><span class="s1">= </span><span class="s2">FAIL</span>
+	<span class="s1">}</span>
+
+	<span class="s0">return </span><span class="s2">r</span>
+<span class="s1">}</span>
+
+
+
+</pre>
+</body>
+</html>
