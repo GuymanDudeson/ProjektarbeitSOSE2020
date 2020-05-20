@@ -2,41 +2,33 @@ package Projektarbeit_Aufgabe4
 
 type Optional struct {
 	b bool
-	val string
+	val Exp
 }
 
-func newEmptyOptional() *Optional {
-	return &Optional{
+func newEmptyOptional() Optional {
+	return Optional{
 		b:   false,
-		val: "",
+		val: nil,
 	}
 }
 
-func newOptional(val string) *Optional{
-	return &Optional{
+func newOptional(val Exp) Optional{
+	return Optional{
 		b:   true,
 		val: val,
 	}
 }
 
-func isJust(o *Optional) bool{
+func(o Optional) isJust() bool{
 	return o.b
 }
 
-func isNothing(o *Optional) bool{
+func(o Optional) isNothing() bool{
 	return !o.b
 }
 
-func fromJust(o *Optional) string{
+func(o Optional) fromJust() Exp{
 	return o.val
-}
-
-func nothing() *Optional{
-	return newEmptyOptional()
-}
-
-func just(val string) *Optional{
-	return newOptional(val)
 }
 
 
