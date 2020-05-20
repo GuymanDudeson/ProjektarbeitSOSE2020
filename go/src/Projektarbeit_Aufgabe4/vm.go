@@ -13,21 +13,21 @@ type Code struct {
 	val int
 }
 
-func newPush(o OpCode, i int) Code{
+func newPush(i int) Code{
 	return Code{
 		kind: VM_PUSH,
 		val:  i,
 	}
 }
 
-func newPlus(o OpCode) Code{
+func newPlus() Code{
 	return Code{
 		kind: VM_PLUS,
 		val:  0,
 	}
 }
 
-func newMult(o OpCode) Code{
+func newMult() Code{
 	return Code{
 		kind: VM_MULT,
 		val:  0,
@@ -76,7 +76,7 @@ func(vm VM) run() int{
 	}
 
 	if vm.stack.isEmpty() {
-		return 0
+		return -1
 	}
 	return vm.stack.getTop()
 }
