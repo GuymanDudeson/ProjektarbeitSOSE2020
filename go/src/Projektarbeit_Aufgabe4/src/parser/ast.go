@@ -112,6 +112,8 @@ func (exp MultExp) GetKind() expType{
 	return MULTEXP
 }
 
+//Assignment Syntax
+
 func (exp MultExp) pretty() string{	//Only case where we need to add parentheses is when an addition is part of a multiplication
 	var s = strings.Builder{}
 
@@ -134,3 +136,5 @@ func (exp MultExp) pretty() string{	//Only case where we need to add parentheses
 	}
 	return s.String()
 }
+
+//

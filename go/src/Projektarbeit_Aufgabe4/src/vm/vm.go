@@ -38,6 +38,8 @@ func NewMult() Code {
 	}
 }
 
+//Assignment Semantik
+
 func AstToCode(astOptional parser.Optional, code []Code) []Code{	//functions as a startpoint for recursively translating the AST
 	return translateAstToCode(astOptional.Val, &code)
 }
@@ -58,6 +60,7 @@ func translateAstToCode(ast parser.Exp, code *[]Code) []Code {		//Works recursiv
 	return *code
 }
 
+//
 type VM struct {
 	code  []Code
 	stack Stack

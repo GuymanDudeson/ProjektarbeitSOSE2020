@@ -1,5 +1,5 @@
 package parser
-//Equivalent to C++ Sourcefile
+//Mostly equivalent to C++ Sourcefile
 import "fmt"
 
 func display(e Optional) {

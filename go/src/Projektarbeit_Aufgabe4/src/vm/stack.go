@@ -5,7 +5,7 @@ type Stack struct {
 }
 
 func(stack *Stack) clear(){
-	stack.slice = stack.slice[:0]		//Empty's the stack
+	stack.slice = stack.slice[:0]		//Empties the stack
 }
 
 func(stack *Stack) isEmpty() bool {
