@@ -1,8 +1,8 @@
 package main
 
-import "ProjektarbeitSOSE2020/go/src/Projektarbeit_Aufgabe4/src/vm"
+import "ProjektarbeitSOSE2020/go/src/Projektarbeit_Aufgabe4/src/parser"
 
 func main() {
-	//parser.TestParserGood()
-	vm.TestVM()
+	parser.TestParserGood()
+	//vm.TestVM()
 }

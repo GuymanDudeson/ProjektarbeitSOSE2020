@@ -5,8 +5,17 @@ import (
 	"strings"
 )
 
+type expType int
+const (
+	INTEXP expType = 0
+	PLUSEXP expType = 1
+	MULTEXP expType = 2
+)
+
+
 type Exp interface {
 	eval() int
+	getKind() expType
 	pretty() string
 }
 
@@ -20,6 +29,10 @@ func NewIntExp(val int) IntExp {
 
 func (exp IntExp) eval() int{
 	return exp.val
+}
+
+func (exp IntExp) getKind() expType{
+	return INTEXP
 }
 
 func (exp IntExp) pretty() string{
@@ -42,13 +55,15 @@ func (exp PlusExp) eval() int{
 	return exp.e1.eval() + exp.e2.eval()
 }
 
+func (exp PlusExp) getKind() expType{
+	return PLUSEXP
+}
+
 func (exp PlusExp) pretty() string{
 	var s = strings.Builder{}
-	s.WriteString("(")
 	s.WriteString(exp.e1.pretty())
 	s.WriteString(" + ")
 	s.WriteString(exp.e2.pretty())
-	s.WriteString(")")
 	return s.String()
 }
 
@@ -68,12 +83,29 @@ func (exp MultExp) eval() int{
 	return exp.e1.eval() * exp.e2.eval()
 }
 
+func (exp MultExp) getKind() expType{
+	return MULTEXP
+}
+
 func (exp MultExp) pretty() string{
 	var s = strings.Builder{}
-	s.WriteString("(")
-	s.WriteString(exp.e1.pretty())
+
+	if exp.e1.getKind() == 1{
+		s.WriteString("(")
+		s.WriteString(exp.e1.pretty())
+		s.WriteString(")")
+	} else {
+		s.WriteString(exp.e1.pretty())
+	}
+
 	s.WriteString(" * ")
-	s.WriteString(exp.e2.pretty())
-	s.WriteString(")")
+
+	if exp.e2.getKind() == 1{
+		s.WriteString("(")
+		s.WriteString(exp.e2.pretty())
+		s.WriteString(")")
+	} else {
+		s.WriteString(exp.e2.pretty())
+	}
 	return s.String()
 }
