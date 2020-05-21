@@ -1,5 +1,5 @@
 package parser
-
+//Equivalent with C++Sourcefile. Some function names changed.
 type Parser struct {
 	t Tokenizer
 }

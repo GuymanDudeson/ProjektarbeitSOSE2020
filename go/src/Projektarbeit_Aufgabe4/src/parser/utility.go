@@ -1,4 +1,5 @@
 package parser
+//There are no Generics in GO so Optional only supports values which implement the Exp interface
 
 type Optional struct {
 	b   bool

@@ -38,20 +38,20 @@ func NewMult() Code {
 	}
 }
 
-func AstToCode(astOptional parser.Optional, code []Code) []Code{
+func AstToCode(astOptional parser.Optional, code []Code) []Code{	//functions as a startpoint for recursively translating the AST
 	return translateAstToCode(astOptional.Val, &code)
 }
 
-func translateAstToCode(ast parser.Exp, code *[]Code) []Code {
-	if ast.GetKind() == 0 {
-		return append(*code, NewPush(ast.Eval()))
+func translateAstToCode(ast parser.Exp, code *[]Code) []Code {		//Works recursively through the AST adding PUSH,PLUS,MULT respectively to a slice
+	if ast.GetKind() == 0 {									//We know current Exp is an IntExp and is therefore a leaf of our tree
+		return append(*code, NewPush(ast.Eval()))			//so we create a new Push with its value
 	} else {
-		*code = translateAstToCode(ast.GetE2(), code)
-		*code = translateAstToCode(ast.GetE1(), code)
-		if ast.GetKind() == 1 {
+		*code = translateAstToCode(ast.GetE2(), code)		//We know current Exp is a Plus/Mult and therefore a node of our tree
+		*code = translateAstToCode(ast.GetE1(), code)		//so we start the recursion for its subExp
+		if ast.GetKind() == 1 {		//We know current node is a Plus so we create Plus code
 			return append(*code, NewPlus())
 		}
-		if ast.GetKind() == 2 {
+		if ast.GetKind() == 2 {		//We know current node is a Plus so we create Mult code
 			return append(*code, NewMult())
 		}
 	}
@@ -70,12 +70,12 @@ func NewVM(c []Code) *VM {
 	}
 }
 
-func(vm *VM) clearStack() {
+func(vm *VM) clearStack() {  	//Empties the current stack
 	vm.stack.clear()
 }
 
 func(vm *VM) run() int{
-	vm.clearStack()
+	vm.clearStack()		//Empties the current stack on a fresh start
 
 	for	_, c := range vm.code{
 		switch c.kind {

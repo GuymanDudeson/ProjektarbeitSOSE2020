@@ -5,20 +5,19 @@ import (
 	"strings"
 )
 
-type expType int
+type expType int	//Custom Enum Identifiers for different kinds of Exp
 const (
 	INTEXP expType = 0
 	PLUSEXP expType = 1
 	MULTEXP expType = 2
 )
 
-
-type Exp interface {
-	GetE1() Exp
-	GetE2() Exp
-	Eval() int
-	GetKind() expType
-	pretty() string
+type Exp interface {	//Interface providing functions to get:
+	GetE1() Exp			//Sub-Exp
+	GetE2() Exp			//Sub-Exp
+	Eval() int			//Result of Addition/Multiplication
+	GetKind() expType	//Identifier
+	pretty() string		//Exp as formatted String with parantheses where necessary
 }
 
 type IntExp struct {
@@ -113,10 +112,10 @@ func (exp MultExp) GetKind() expType{
 	return MULTEXP
 }
 
-func (exp MultExp) pretty() string{
+func (exp MultExp) pretty() string{	//Only case where we need to add parentheses is when an addition is part of a multiplication
 	var s = strings.Builder{}
 
-	if exp.e1.GetKind() == 1{
+	if exp.e1.GetKind() == 1{		//We know Exp 1 is an addition so we add Parentheses
 		s.WriteString("(")
 		s.WriteString(exp.e1.pretty())
 		s.WriteString(")")
@@ -126,7 +125,7 @@ func (exp MultExp) pretty() string{
 
 	s.WriteString(" * ")
 
-	if exp.e2.GetKind() == 1{
+	if exp.e2.GetKind() == 1{		//We know Exp 2 is an addition so we add Parentheses
 		s.WriteString("(")
 		s.WriteString(exp.e2.pretty())
 		s.WriteString(")")

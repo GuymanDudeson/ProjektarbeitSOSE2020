@@ -1,5 +1,5 @@
 package parser
-
+//Mostly Equivalent to C++ Sourcefile. Changes to Tokenize line 82...
 type Token int
 const (
 	EOS   Token = 0
@@ -80,12 +80,12 @@ func (t *Tokenize) next() Token {
 }
 
 func (t *Tokenize) scan() []Token {
-	var v []Token
+	var v []Token						//Vector changed to a slice for simplicity
 	var tempToken Token
 
 	for {
 		tempToken = t.next()
-		v = append(v, tempToken)
+		v = append(v, tempToken)		//New tokens are simply appended to slice
 		if tempToken == EOS {
 			break
 		}

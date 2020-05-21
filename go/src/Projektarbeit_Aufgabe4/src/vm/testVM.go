@@ -16,7 +16,7 @@ func showVMRes(r int) {
 func TestVM(astToTranslate []parser.Optional){
 	var astCode []Code
 	var res int
-	for _, att := range astToTranslate{
+	for _, att := range astToTranslate{			//Takes the already parsed AST builds VM code out of it and runs a new VM
 		astCode = AstToCode(att, astCode)
 		res = NewVM(astCode).run()
 		showVMRes(res)
