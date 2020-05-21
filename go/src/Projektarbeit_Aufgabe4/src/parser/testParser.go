@@ -11,13 +11,41 @@ func display(e Optional) {
 	return
 }
 
-func TestParserGood() {
-	display(NewParser("1").Parse())
-	display(NewParser("1 + 0").Parse())
-	display(NewParser("1 + (0) ").Parse())
-	display(NewParser("1 + 2 * 0").Parse())
-	display(NewParser("1 * 2 + 0").Parse())
-	display(NewParser("(1 + 2) * 0").Parse())
-	display(NewParser("(1 + 2) * 0 + 2").Parse())
-	display(NewParser("(1 + 2) * (0 + 2) + (1 * ((0 * 2 + 2 * 1) * (2 + 0)))").Parse())
+func TestParserGood() []Optional {
+	var ast Optional
+	var parsedAst []Optional
+
+	ast = NewParser("1").Parse()
+	parsedAst = append(parsedAst, ast)
+	display(ast)
+
+	ast = NewParser("1 + 0").Parse()
+	parsedAst = append(parsedAst, ast)
+	display(ast)
+
+	ast = NewParser("1 + (0) ").Parse()
+	parsedAst = append(parsedAst, ast)
+	display(ast)
+
+	ast = NewParser("1 + 2 * 0").Parse()
+	parsedAst = append(parsedAst, ast)
+	display(ast)
+
+	ast = NewParser("1 * 2 + 0").Parse()
+	parsedAst = append(parsedAst, ast)
+	display(ast)
+
+	ast = NewParser("(1 + 2) * 0").Parse()
+	parsedAst = append(parsedAst, ast)
+	display(ast)
+
+	ast = NewParser("(1 + 2) * 0 + 2").Parse()
+	parsedAst = append(parsedAst, ast)
+	display(ast)
+
+	ast = NewParser("(1 + 2) * (0 + 2) + (1 * ((0 * 2 + 2 * 1) * (2 + 0)))").Parse()
+	parsedAst = append(parsedAst, ast)
+	display(ast)
+
+	return parsedAst
 }
