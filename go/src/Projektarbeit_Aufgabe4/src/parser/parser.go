@@ -8,7 +8,7 @@ func NewParser(s string) *Parser {
 	return &Parser{t: newTokenizer(s)}
 }
 
-func(p *Parser) parse() Optional{
+func(p *Parser) Parse() Optional{
 	return p.parseE()
 }
 

@@ -1,5 +1,9 @@
 package vm
 
+import (
+	"ProjektarbeitSOSE2020/go/src/Projektarbeit_Aufgabe4/src/parser"
+)
+
 type OpCode int
 
 const (
@@ -32,6 +36,26 @@ func NewMult() Code {
 		kind: VM_MULT,
 		val:  0,
 	}
+}
+
+func AstToCode(astOptional parser.Optional, code []Code) []Code{
+	return translateAstToCode(astOptional.Val, &code)
+}
+
+func translateAstToCode(ast parser.Exp, code *[]Code) []Code {
+	if ast.GetKind() == 0 {
+		return append(*code, NewPush(ast.Eval()))
+	} else {
+		*code = translateAstToCode(ast.GetE2(), code)
+		*code = translateAstToCode(ast.GetE1(), code)
+		if ast.GetKind() == 1 {
+			return append(*code, NewPlus())
+		}
+		if ast.GetKind() == 2 {
+			return append(*code, NewMult())
+		}
+	}
+	return *code
 }
 
 type VM struct {

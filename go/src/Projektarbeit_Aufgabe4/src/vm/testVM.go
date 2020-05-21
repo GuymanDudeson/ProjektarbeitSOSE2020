@@ -1,6 +1,9 @@
 package vm
 
-import "fmt"
+import (
+	"ProjektarbeitSOSE2020/go/src/Projektarbeit_Aufgabe4/src/parser"
+	"fmt"
+)
 
 func showVMRes(r int) {
 	if r == -1{
@@ -10,14 +13,23 @@ func showVMRes(r int) {
 	fmt.Printf("\nVM stack (top): %d", r)
 }
 
-func TestVM(){
+func TestVM(astToTranslate []parser.Optional){
+	var astCode []Code
+	var res int
+	for _, att := range astToTranslate{
+		astCode = AstToCode(att, astCode)
+		res = NewVM(astCode).run()
+		showVMRes(res)
+		astCode = astCode[:len(astCode) - 1]
+	}
+
 	var vc = []Code{NewPush(1),
 		NewPush(2),
 		NewPush(3),
 		NewMult(),
 		NewPlus()}
 
-	var res = NewVM(vc).run()
+	res = NewVM(vc).run()
 	showVMRes(res)
 
 	vc = []Code{NewPush(2),

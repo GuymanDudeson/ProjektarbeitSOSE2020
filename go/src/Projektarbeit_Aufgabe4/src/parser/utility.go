@@ -1,21 +1,21 @@
 package parser
 
 type Optional struct {
-	b bool
-	val Exp
+	b   bool
+	Val Exp
 }
 
 func NewEmptyOptional() Optional {
 	return Optional{
 		b:   false,
-		val: nil,
+		Val: nil,
 	}
 }
 
 func NewOptional(val Exp) Optional {
 	return Optional{
 		b:   true,
-		val: val,
+		Val: val,
 	}
 }
 
@@ -28,7 +28,7 @@ func(o Optional) isNothing() bool{
 }
 
 func(o Optional) fromJust() Exp{
-	return o.val
+	return o.Val
 }
 
 
