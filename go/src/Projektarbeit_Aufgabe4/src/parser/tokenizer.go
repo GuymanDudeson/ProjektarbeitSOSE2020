@@ -1,4 +1,4 @@
-package ParserVM
+package parser
 
 type Token int
 const (
@@ -39,7 +39,7 @@ func newTokenize(_s string) Tokenize {
 	return t
 }
 
-func (t Tokenize) Next() Token {
+func (t *Tokenize) next() Token {
 	if len(t.s) <= t.pos {
 		return EOS
 	}
@@ -79,12 +79,12 @@ func (t Tokenize) Next() Token {
 	return EOS
 }
 
-func (t Tokenize) scan() []Token {
+func (t *Tokenize) scan() []Token {
 	var v []Token
 	var tempToken Token
 
 	for {
-		tempToken = t.Next()
+		tempToken = t.next()
 		v = append(v, tempToken)
 		if tempToken == EOS {
 			break
@@ -98,7 +98,7 @@ func (t Tokenize) show() string {
 	var s string
 
 	for i, currentToken := range v {
-		s += showTok(Token(currentToken))
+		s += showTok(currentToken)
 
 		if i+1 < len(v) {
 			s += ";"
@@ -114,11 +114,11 @@ type Tokenizer struct {
 
 func newTokenizer(s string) Tokenizer {
 	var tokenize = newTokenize(s)
-	var token = tokenize.Next()
+	var token = tokenize.next()
 	return Tokenizer{tokenize, token}
 }
 
-func (t Tokenizer) nextToken() {
-	t.Token = t.Tokenize.Next()
+func (t *Tokenizer) nextToken() {
+	t.Token = t.Tokenize.next()
 }
 

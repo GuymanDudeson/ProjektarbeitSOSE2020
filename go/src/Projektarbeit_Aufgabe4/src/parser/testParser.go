@@ -1,4 +1,4 @@
-package ParserVM
+package parser
 
 import "fmt"
 
@@ -6,7 +6,7 @@ func display(e Optional) {
 	if e.isNothing(){
 		fmt.Printf("nothing\n")
 	} else {
-		fmt.Printf("%s \n", e.fromJust().Pretty())
+		fmt.Printf("%s \n", e.fromJust().pretty())
 	}
 	return
 }

@@ -1,4 +1,4 @@
-package ParserVM
+package vm
 
 type OpCode int
 

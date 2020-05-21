@@ -1,18 +1,18 @@
-package ParserVM
+package parser
 
 type Parser struct {
 	t Tokenizer
 }
 
-func NewParser(s string) Parser {
-	return Parser{t: newTokenizer(s)}
+func NewParser(s string) *Parser {
+	return &Parser{t: newTokenizer(s)}
 }
 
-func(p Parser) parse() Optional{
+func(p *Parser) parse() Optional{
 	return p.parseE()
 }
 
-func(p Parser) parseE() Optional{
+func(p *Parser) parseE() Optional{
 	var t = p.parseT()
 
 	if t.isNothing(){
@@ -22,7 +22,7 @@ func(p Parser) parseE() Optional{
 	return p.parseE2(t.fromJust())
 }
 
-func(p Parser) parseE2(left Exp) Optional{
+func(p *Parser) parseE2(left Exp) Optional{
 	if p.t.Token == PLUS {
 		p.t.nextToken()
 
@@ -37,7 +37,7 @@ func(p Parser) parseE2(left Exp) Optional{
 	return NewOptional(left)
 }
 
-func(p Parser) parseT() Optional{
+func(p *Parser) parseT() Optional{
 	var f = p.parseF()
 	if f.isNothing() {
 		return f
@@ -46,7 +46,7 @@ func(p Parser) parseT() Optional{
 	return p.parseT2(f.fromJust())
 }
 
-func(p Parser) parseT2(left Exp) Optional{
+func(p *Parser) parseT2(left Exp) Optional{
 	if p.t.Token == MULT {
 		p.t.nextToken()
 
@@ -60,7 +60,7 @@ func(p Parser) parseT2(left Exp) Optional{
 	return NewOptional(left)
 }
 
-func(p Parser) parseF() Optional{
+func(p *Parser) parseF() Optional{
 	switch p.t.Token {
 	case ZERO:
 		p.t.nextToken()

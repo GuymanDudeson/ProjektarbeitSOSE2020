@@ -1,4 +1,4 @@
-package ParserVM
+package vm
 
 import "fmt"
 
@@ -12,10 +12,10 @@ func showVMRes(r int) {
 
 func TestVM(){
 	var vc = []Code{NewPush(1),
-					NewPush(2),
-					NewPush(3),
-					NewMult(),
-					NewPlus()}
+		NewPush(2),
+		NewPush(3),
+		NewMult(),
+		NewPlus()}
 
 	var res = NewVM(vc).run()
 	showVMRes(res)

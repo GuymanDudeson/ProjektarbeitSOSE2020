@@ -1,4 +1,4 @@
-package ParserVM
+package parser
 
 type Optional struct {
 	b bool
