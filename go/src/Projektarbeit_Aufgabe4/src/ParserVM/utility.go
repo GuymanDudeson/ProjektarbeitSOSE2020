@@ -1,10 +1,8 @@
-package utility
-
-import "Projektarbeit_Aufgabe4/src/ast"
+package ParserVM
 
 type Optional struct {
 	b bool
-	val ast.Exp
+	val Exp
 }
 
 func NewEmptyOptional() Optional {
@@ -14,22 +12,22 @@ func NewEmptyOptional() Optional {
 	}
 }
 
-func NewOptional(val ast.Exp) Optional{
+func NewOptional(val Exp) Optional {
 	return Optional{
 		b:   true,
 		val: val,
 	}
 }
 
-func(o Optional) IsJust() bool{
+func(o Optional) isJust() bool{
 	return o.b
 }
 
-func(o Optional) IsNothing() bool{
+func(o Optional) isNothing() bool{
 	return !o.b
 }
 
-func(o Optional) FromJust() ast.Exp{
+func(o Optional) fromJust() Exp{
 	return o.val
 }
 

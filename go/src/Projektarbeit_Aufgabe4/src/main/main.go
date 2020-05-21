@@ -1,13 +1,10 @@
 package main
 
 import (
-	"Projektarbeit_Aufgabe4/src/testParser"
-	"Projektarbeit_Aufgabe4/src/testVM"
-	"fmt"
+	"ProjektarbeitSOSE2020/go/src/Projektarbeit_Aufgabe4/src/ParserVM"
 )
 
 func main() {
-	fmt.Printf("Heyo")
-	testParser.TestParserGood()
-	testVM.TestVM()
+	ParserVM.TestParserGood()
+	ParserVM.TestVM()
 }
