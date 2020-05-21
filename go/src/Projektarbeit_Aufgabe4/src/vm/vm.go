@@ -39,18 +39,18 @@ type VM struct {
 	stack Stack
 }
 
-func NewVM(c []Code) VM {
-	return VM{
+func NewVM(c []Code) *VM {
+	return &VM{
 		code:  c,
 		stack: Stack{},
 	}
 }
 
-func(vm VM) clearStack() {
+func(vm *VM) clearStack() {
 	vm.stack.clear()
 }
 
-func(vm VM) run() int{
+func(vm *VM) run() int{
 	vm.clearStack()
 
 	for	_, c := range vm.code{

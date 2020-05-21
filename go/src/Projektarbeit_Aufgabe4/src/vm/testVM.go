@@ -7,7 +7,7 @@ func showVMRes(r int) {
 		fmt.Printf("\nVM stack (top): empty")
 		return
 	}
-	fmt.Printf("\nVM stack (top): ", r)
+	fmt.Printf("\nVM stack (top): %d", r)
 }
 
 func TestVM(){
