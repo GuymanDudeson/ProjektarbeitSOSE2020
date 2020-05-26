@@ -21,6 +21,7 @@
 - Changes made were:
   - Representing a string as a slice of runes.
   - New logic without pointer arithmetic
+
 **Assigment 3:**
   - Too C++ specific. No sensible way to translate to GO therefore discarded.
 
