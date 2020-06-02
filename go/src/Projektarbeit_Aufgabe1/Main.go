@@ -9,6 +9,7 @@ func main() {
 	var s = "Ha::ll:o"
 	var p = "::"
 
+
 	fmt.Printf("The longest Suffix of %s that does not contain %s is %s\n", s, p, longestSuffixEasy(s, p))
 	fmt.Printf("The longest Suffix of %s that does not contain %s is %s\n", s, p, longestSuffixWithoutSplit(s, p))
 
@@ -30,10 +31,11 @@ func main() {
 		{longestSuffixWithoutSplit("Ha:ll:o", "::"), "Ha:ll:o"},
 		{longestSuffixWithoutSplit("Ha::ll:::o", "::"), ":o"},
 		{longestSuffixWithoutSplit("Ha::ll:o::", "::"), ":"},
+		{longestSuffixWithoutSplit("Haϴϴll:oϴϴ", "ϴϴ"), "ϴ"},
+		{longestSuffixWithoutSplit("HaϴϴΈlΈo", "ϴϴ"), "ϴΈlΈo"},
+		{longestSuffixWithoutSplit("ϴΈ::Έ", "::"), ":Έ"},
 	}
-
 	runTests(tests)
-
 }
 
 func longestSuffixEasy(s string, pattern string) string {
@@ -41,25 +43,32 @@ func longestSuffixEasy(s string, pattern string) string {
 	return suffixes[len(suffixes) - 1]		//Last Slice entry is automatically the longest suffix without the pattern
 }
 
+//2 runs over the String as a []rune
+//1. Search possible Index for the longest suffix
+//2. Check if Index represents entire pattern
+//return resliced string only containing longest suffix
 func longestSuffixWithoutSplit(s string, pattern string) string{
-	var patternlength = len(pattern)
-	var stringLength = len(s)
-	var longestSuffix strings.Builder
+	var originalString = []rune(s)
+	var stringLength = len(originalString)
+
+	var patternRunes = []rune(pattern)
+	var patternlength = len(patternRunes)
+
 	var longestSuffixIndex = 0
 
 	//Loop iterates over all runes in the give String
-	for i, r := range s {
+	for i, r := range originalString {
 
 		//If the remaining String is not big enough to contain the Pattern stop searching
 		if stringLength - i >= patternlength{
 
 			//If a rune matches the start of the pattern compare all subsequent runes until one doesn't match or pattern complete
-			if r == int32(pattern[0]) {
+			if r == patternRunes[0] {
 				for j := 1; j <= patternlength; j++ {
 					if j == patternlength{
 						longestSuffixIndex = i + 1
 						break
-					} else if s[i + j] != pattern[j]{
+					} else if originalString[i + j] != patternRunes[j]{
 						break
 					}
 				}
@@ -67,12 +76,9 @@ func longestSuffixWithoutSplit(s string, pattern string) string{
 		}
 	}
 
-	//Builds a new String only containing the Suffix
-	for i := longestSuffixIndex; i < stringLength; i++ {
-		longestSuffix.WriteByte(s[i])
-	}
+	longestSuffix := originalString[longestSuffixIndex:]
 
-	return longestSuffix.String()
+	return string(longestSuffix)
 }
 
 
