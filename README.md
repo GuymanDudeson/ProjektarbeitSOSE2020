@@ -4,8 +4,8 @@
 ### The Assignment is to implement various functions/programs initially meant to teach and better understand C/C++ in GO.
 
 **Assignment 0 Prologue:**
--Added to explain the significance of rune as a datatype for string operations in rune.
--Important to understand design decisions in Assignment 1 and 2.
+- Added to explain the significance of rune as a datatype for string operations in rune.
+- Important to understand design decisions in Assignment 1 and 2.
  
 **Assignment 1:**
 - Finding and extracting the longest suffix of a String after a predefined Stringpattern.
