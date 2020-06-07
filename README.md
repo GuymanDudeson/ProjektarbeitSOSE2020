@@ -30,6 +30,7 @@
   - Too C++ specific. No sensible way to translate to GO, therefore discarded.
 
 **Assigment 4:**
+**Direct translation from c/c++**
 - Building a parser for simple arithmetic strings which builds a mathematically correct tree for the order of operations.
 - Building a VM which can interpret a parsed tree and calculate the result.
 - Parser and VM are provided in the original assigment.
