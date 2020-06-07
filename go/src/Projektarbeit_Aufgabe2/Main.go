@@ -19,9 +19,9 @@ func main() {
 }
 
 
-//Teil a
+//Part a
 //Runs through the string from back to front
-//Appends each byte to the end of return string
+//Appends each Rune to the end of return string
 func reverse(s string) string{
 	var originalString = []rune(s)
 	var reversedString []rune
@@ -33,7 +33,7 @@ func reverse(s string) string{
 	return string(reversedString)
 }
 
-//Teil b
+//Part b
 //Recursively appends the first Character of the given String to it's end.
 //Continues Recursion with the Original String without the first Character
 //Recursion ends when no Characters are left in String (length == 0)
